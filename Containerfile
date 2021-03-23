@@ -18,7 +18,7 @@ RUN mkdir -p /opt/{app-root,app-src}/ \
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/app-root/bin:/opt/app-root/go/bin
 ENV GOPATH=/opt/app-root/go
 
-RUN wget -O /tmp/golang.tar.gz https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz \
+RUN wget –q -O /tmp/golang.tar.gz https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz \
  && tar -C /opt/app-root -xzf /tmp/golang.tar.gz \
  && go version
 
