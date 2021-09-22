@@ -4,16 +4,10 @@ FROM registry.access.redhat.com/ubi8/ubi:latest
 ARG GOLANG_VERSION=1.16.2
 ARG SYSTEM_ARCH=amd64
 ARG SYSTEM_OS=linux
-ARG TAG_VERSION
+ARG SOURCE_NAME
 
 # Our command is set to bash to allow for easy build piping
 CMD [ "/bin/bash" ]
-
-RUN GO_V=$GOLANG_VERSION \
- && [[ ${TAG_VERSION:0:1} = "v" ]] && GO_V=$(echo $TAG_VERSION | sed 's/v//g') \
- && echo $GO_V \
- && echo $GOLANG_VERSION \
- && echo $TAG_VERSION
 
 # Create file system bits
 RUN mkdir -p /opt/{app-root,app-src}/ \
@@ -33,10 +27,7 @@ RUN dnf update -y \
 # Install Golang
 #RUN if [ -z $TAG_VERSION ]; then GO_V=$GOLANG_VERSION; else GO_V=$(echo $TAG_VERSION | sed 's/v//g'); fi \
 RUN GO_V=$GOLANG_VERSION \
- && [[ ${TAG_VERSION:0:1} = "v" ]] && GO_V=$(echo $TAG_VERSION | sed 's/v//g') \
- && echo $GO_V \
- && echo $GOLANG_VERSION \
- && echo $TAG_VERSION \
+ && if [ ${SOURCE_NAME:0:1} = "v" ]; then GO_V=$(echo $SOURCE_NAME | sed 's/v//g'); fi \
  && curl -sSLk https://golang.org/dl/go${GO_V}.${SYSTEM_OS}-${SYSTEM_ARCH}.tar.gz -o /tmp/golang.tar.gz \
  && tar -C /opt/app-root -xzf /tmp/golang.tar.gz \
  && chmod -R 777 /opt/app-* \

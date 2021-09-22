@@ -73,7 +73,7 @@ jobs:
           GOLANG_VERSION=${{ steps.golang_version.outputs.GOLANG_VERSION }}
           SYSTEM_OS=linux
           SYSTEM_ARCH=amd64
-          TAG_VERSION=${{ steps.git_build_info.outputs.SOURCE_TAG }}
+          SOURCE_NAME=${{ steps.git_build_info.outputs.SOURCE_NAME }}
 
     - name: Create a new Release with the newly built container
       uses: ncipollo/release-action@v1
