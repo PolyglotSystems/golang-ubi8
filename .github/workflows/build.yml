@@ -61,3 +61,7 @@ jobs:
         file: Containerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        build-args: |
+          GOLANG_VERSION=1.16.2
+          SYSTEM_OS=linux
+          SYSTEM_ARCH=amd64
