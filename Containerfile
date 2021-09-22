@@ -1,8 +1,8 @@
+FROM registry.access.redhat.com/ubi8/ubi:latest
+
 ARG GOLANG_VERSION=1.16.2
 ARG SYSTEM_ARCH=amd64
 ARG SYSTEM_OS=linux
-
-FROM registry.access.redhat.com/ubi8/ubi:latest
 
 CMD [ "/bin/bash" ]
 
