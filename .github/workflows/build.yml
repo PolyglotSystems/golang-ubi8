@@ -5,17 +5,14 @@ on:
       - 'README.md'
     branches:
       - main
-      - 'releases/**'
-    tags:        
+    tags:
       - v*
-  schedule:
-    - cron: '0 0 1,15 * *'
 jobs:
   # Build the container
   build-container:
     name: Build Container
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
 
     - name: Check out code
@@ -74,3 +71,9 @@ jobs:
           GOLANG_VERSION=${{ steps.golang_version.outputs.GOLANG_VERSION }}
           SYSTEM_OS=linux
           SYSTEM_ARCH=amd64
+          TAG_VERSION=${{ steps.git_build_info.outputs.SOURCE_TAG }}
+
+    - name: Create a new Release with the newly built container
+      uses: ncipollo/release-action@v1
+      with:
+        token: ${{ secrets.GHUB_TOKEN }}
