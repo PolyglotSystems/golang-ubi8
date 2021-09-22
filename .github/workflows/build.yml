@@ -65,3 +65,4 @@ jobs:
           GOLANG_VERSION=1.16.2
           SYSTEM_OS=linux
           SYSTEM_ARCH=amd64
+          GITHUB_REF=${{ env.GITHUB_REF }}
