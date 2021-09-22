@@ -19,7 +19,6 @@ jobs:
     name: Build Container
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: test
     steps:
 
     - name: Check out code into the Go module directory
