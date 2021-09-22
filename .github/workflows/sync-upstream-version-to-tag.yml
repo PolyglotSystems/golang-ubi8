@@ -19,7 +19,6 @@ jobs:
     - name: Get the latest version of Golang
       id: golang_version
       run: |
-        VERSION=$(curl -sSL https://golang.org/VERSION?m=text)
         echo ::set-output name=GOLANG_VERSION::$(curl -sSL https://golang.org/VERSION?m=text | sed 's/go//g')
 
     - name: Bump version and push tag

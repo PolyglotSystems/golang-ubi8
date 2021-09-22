@@ -1,8 +1,5 @@
 name: Build Golang UBI Container
 on:
-  pull_request:
-    paths-ignore:
-      - 'README.md'
   push:
     paths-ignore:
       - 'README.md'
@@ -31,6 +28,12 @@ jobs:
         echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
         echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
 
+    - name: Get the latest version of Golang
+      id: golang_version
+      run: |
+        echo ${{ steps.git_build_info.outputs.SOURCE_TAG }}
+        echo ::set-output name=GOLANG_VERSION::$(curl -sSL https://golang.org/VERSION?m=text | sed 's/go//g')
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
@@ -50,7 +53,6 @@ jobs:
           type=ref,event=tag
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
-          type=semver,pattern={{major}}
           type=sha
 
     - name: Login to Quay
@@ -69,7 +71,6 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         build-args: |
-          GOLANG_VERSION=1.16.2
+          GOLANG_VERSION=${{ steps.golang_version.outputs.GOLANG_VERSION }}
           SYSTEM_OS=linux
           SYSTEM_ARCH=amd64
-          TAG_VERSION=${{ steps.git_build_info.outputs.SOURCE_TAG }}
