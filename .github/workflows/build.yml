@@ -21,8 +21,12 @@ jobs:
     timeout-minutes: 10
     steps:
 
-    - name: Check out code into the Go module directory
+    - name: Check out code
       uses: actions/checkout@v2.3.4
+
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -65,4 +69,4 @@ jobs:
           GOLANG_VERSION=1.16.2
           SYSTEM_OS=linux
           SYSTEM_ARCH=amd64
-          GITHUB_REF=${{ env.GITHUB_REF }}
+          REL_VERSION=${{ steps.get_version.outputs.VERSION }}

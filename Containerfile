@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/ubi:latest
 ARG GOLANG_VERSION=1.16.2
 ARG SYSTEM_ARCH=amd64
 ARG SYSTEM_OS=linux
-ARG GITHUB_REF=something
+ARG REL_VERSION=something
 
 CMD [ "/bin/bash" ]
 
@@ -21,7 +21,7 @@ RUN mkdir -p /opt/{app-root,app-src}/ \
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/app-root/bin:/opt/app-root/go/bin
 ENV GOPATH=/opt/app-root/go
 
-RUN echo "GOLANG_VERSION: ${GOLANG_VERSION}\nSYSTEM_OS: ${SYSTEM_OS}\nSYSTEM_ARCH: ${SYSTEM_ARCH}\nGITHUB_REF: ${GITHUB_REF}"
+RUN echo "GOLANG_VERSION: ${GOLANG_VERSION}\nSYSTEM_OS: ${SYSTEM_OS}\nSYSTEM_ARCH: ${SYSTEM_ARCH}\nREL_VERSION: ${REL_VERSION}"
 
 RUN curl -sSLk https://golang.org/dl/go${GOLANG_VERSION}.${SYSTEM_OS}-${SYSTEM_ARCH}.tar.gz -o /tmp/golang.tar.gz \
  && tar -C /opt/app-root -xzf /tmp/golang.tar.gz \
