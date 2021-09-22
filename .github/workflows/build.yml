@@ -32,6 +32,9 @@ jobs:
         echo "SOURCE_BRANCH: ${{ steps.git_build_info.outputs.SOURCE_BRANCH }}"
         echo "SOURCE_TAG: ${{ steps.git_build_info.outputs.SOURCE_TAG }}"
         echo ::set-output name=GOLANG_VERSION::$(curl -sSL https://golang.org/VERSION?m=text | sed 's/go//g')
+        IS_TAGGED_VERSION="false"
+        if [ ${SOURCE_NAME:0:1} = "v" ]; then IS_TAGGED_VERSION="true"; fi
+        echo ::set-output name=IS_TAGGED_VERSION::$IS_TAGGED_VERSION
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -76,6 +79,7 @@ jobs:
           SOURCE_NAME=${{ steps.git_build_info.outputs.SOURCE_NAME }}
 
     - name: Create a new Release with the newly built container
+      if: steps.golang_version.outputs.IS_TAGGED_VERSION == "true"
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GHUB_TOKEN }}

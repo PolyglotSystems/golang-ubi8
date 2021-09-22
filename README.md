@@ -1,6 +1,6 @@
 # golang-ubi8
 
-[![Container Repository on Quay](https://quay.io/repository/polyglotsystems/golang-ubi/status "Container Repository on Quay")](https://quay.io/repository/polyglotsystems/golang-ubi)
+[![Container Image on Quay](https://img.shields.io/badge/Container%20Image-Quay.io-orange)](https://quay.io/polyglotsystems/golang-ubi) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/PolyglotSystems/golang-ubi8/Build%20Golang%20UBI%20Container?label=Container%20Build&style=flat-square) ![GitHub](https://img.shields.io/github/license/PolyglotSystems/golang-ubi8) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/PolyglotSystems/golang-ubi8)
 
 A Golang builder container based on RHEL UBI 8.
 
