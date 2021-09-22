@@ -19,10 +19,10 @@ jobs:
     - name: Get the latest version of Golang
       id: golang_version
       run: |
-        VERSION=$(curl https://golang.org/VERSION?m=text)
-        echo ::set-output name=GOLANG_VERSION::$(curl https://golang.org/VERSION?m=text)
+        VERSION=$(curl -sSL https://golang.org/VERSION?m=text)
+        echo ::set-output name=GOLANG_VERSION::$(curl -sSL https://golang.org/VERSION?m=text)
 
     - name: Test output
       id: test_output
       run: |
-        echo "${{ steps.git_build_info.outputs.GOLANG_VERSION }}"
+        echo "${{ steps.golang_version.outputs.GOLANG_VERSION }}"
