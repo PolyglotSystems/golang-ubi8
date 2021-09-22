@@ -1,0 +1,27 @@
+name: Check the Golang latest version and create a version for it as well
+on:
+  push:
+    branches:
+      - '*'
+    tags:        
+      - '*'
+  schedule:
+    - cron: '0 0 1,15 * *'
+
+jobs:
+
+  sync-upstream:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Get the latest version of Golang
+      id: golang_version
+      run: |
+        echo ::set-output name=GOLANG_VERSION::$(curl -sSL https://golang.org/VERSION?m=text)
+
+    - name: Test output
+      id: test_output
+      run: |
+        echo "${{ steps.git_build_info.outputs.SOURCE_TAG }}"

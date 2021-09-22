@@ -1,13 +1,13 @@
 name: Create a new Release on Tag creation
 
-on: 
+on:
   push:
     tags:
     - 'v*'
 
 jobs:
 
-  build:
+  create-release:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
