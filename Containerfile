@@ -9,6 +9,12 @@ ARG TAG_VERSION
 # Our command is set to bash to allow for easy build piping
 CMD [ "/bin/bash" ]
 
+RUN GO_V=$GOLANG_VERSION \
+ && [[ ${TAG_VERSION:0:1} = "v" ]] && GO_V=$(echo $TAG_VERSION | sed 's/v//g') \
+ && echo $GO_V \
+ && echo $GOLANG_VERSION \
+ && echo $TAG_VERSION
+
 # Create file system bits
 RUN mkdir -p /opt/{app-root,app-src}/ \
  && mkdir -p /opt/app-root/{bin,go} \
@@ -28,6 +34,9 @@ RUN dnf update -y \
 #RUN if [ -z $TAG_VERSION ]; then GO_V=$GOLANG_VERSION; else GO_V=$(echo $TAG_VERSION | sed 's/v//g'); fi \
 RUN GO_V=$GOLANG_VERSION \
  && [[ ${TAG_VERSION:0:1} = "v" ]] && GO_V=$(echo $TAG_VERSION | sed 's/v//g') \
+ && echo $GO_V \
+ && echo $GOLANG_VERSION \
+ && echo $TAG_VERSION \
  && curl -sSLk https://golang.org/dl/go${GO_V}.${SYSTEM_OS}-${SYSTEM_ARCH}.tar.gz -o /tmp/golang.tar.gz \
  && tar -C /opt/app-root -xzf /tmp/golang.tar.gz \
  && chmod -R 777 /opt/app-* \
