@@ -25,7 +25,9 @@ RUN dnf update -y \
   && rm -rf /var/cache/yum
 
 # Install Golang
-RUN if [ -z $TAG_VERSION ]; then GO_V=$GOLANG_VERSION; else GO_V=$(echo $TAG_VERSION | sed 's/v//g'); fi \
+#RUN if [ -z $TAG_VERSION ]; then GO_V=$GOLANG_VERSION; else GO_V=$(echo $TAG_VERSION | sed 's/v//g'); fi \
+RUN GO_V=$GOLANG_VERSION \
+ && [[ ${TAG_VERSION:0:1} = "v" ]] && GO_V=$(echo $TAG_VERSION | sed 's/v//g') \
  && curl -sSLk https://golang.org/dl/go${GO_V}.${SYSTEM_OS}-${SYSTEM_ARCH}.tar.gz -o /tmp/golang.tar.gz \
  && tar -C /opt/app-root -xzf /tmp/golang.tar.gz \
  && chmod -R 777 /opt/app-* \

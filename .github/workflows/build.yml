@@ -28,7 +28,9 @@ jobs:
     - name: Get the latest version of Golang
       id: golang_version
       run: |
-        echo ${{ steps.git_build_info.outputs.SOURCE_TAG }}
+        echo "SOURCE_NAME: ${{ steps.git_build_info.outputs.SOURCE_NAME }}"
+        echo "SOURCE_BRANCH: ${{ steps.git_build_info.outputs.SOURCE_BRANCH }}"
+        echo "SOURCE_TAG: ${{ steps.git_build_info.outputs.SOURCE_TAG }}"
         echo ::set-output name=GOLANG_VERSION::$(curl -sSL https://golang.org/VERSION?m=text | sed 's/go//g')
 
     - name: Set up QEMU
