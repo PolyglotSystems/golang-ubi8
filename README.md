@@ -16,7 +16,8 @@ docker pull quay.io/polyglotsystems/golang-ubi:latest
 
 ## Tags
 
-- `:latest`, `:1.16.2`
+- `:latest`, `:1.17`, `:1.17.1`
+- `:1.16.2`
 
 # Licenses
 
