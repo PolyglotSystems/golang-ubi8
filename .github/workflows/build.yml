@@ -28,6 +28,13 @@ jobs:
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
+    - name: Git Build Info
+      id: git_build_info
+      run: |
+        echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
+        echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
+        echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
@@ -69,4 +76,4 @@ jobs:
           GOLANG_VERSION=1.16.2
           SYSTEM_OS=linux
           SYSTEM_ARCH=amd64
-          REL_VERSION=${{ steps.get_version.outputs.VERSION }}
+          TAG_VERSION=${{ steps.git_build_info.outputs.SOURCE_TAG }}
