@@ -1,4 +1,4 @@
-name: Check the Golang latest version and create a version for it as well
+name: Sync with Golang Version
 on:
   push:
     branches:
@@ -19,7 +19,8 @@ jobs:
     - name: Get the latest version of Golang
       id: golang_version
       run: |
-        echo ::set-output name=GOLANG_VERSION::$(curl -sSL https://golang.org/VERSION?m=text)
+        VERSION=$(curl https://golang.org/VERSION?m=text)
+        echo ::set-output name=GOLANG_VERSION::${VERSION}
 
     - name: Test output
       id: test_output
