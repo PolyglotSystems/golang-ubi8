@@ -1,17 +1,17 @@
 # golang-ubi8
 
-[![Container Repository on Quay](https://quay.io/repository/kenmoini/golang-ubi/status "Container Repository on Quay")](https://quay.io/repository/kenmoini/golang-ubi)
+[![Container Repository on Quay](https://quay.io/repository/polyglotsystems/golang-ubi/status "Container Repository on Quay")](https://quay.io/repository/polyglotsystems/golang-ubi)
 
 A Golang builder container based on RHEL UBI 8.
 
-This container image is available on Quay and should be a drop-in replacement for the official Golang containers on Docker Hub that are based on Alpine and Ubuntu.
+This container image is available on Quay and should be a drop-in replacement for the official Golang containers on Docker Hub that are based on Alpine and Ubuntu - without the Docker Hub pull limits.
 
 ## Pulling the Container
 
 ```bash
-podman pull quay.io/kenmoini/golang-ubi:latest
+podman pull quay.io/polyglotsystems/golang-ubi:latest
 # or
-docker pull quay.io/kenmoini/golang-ubi:latest
+docker pull quay.io/polyglotsystems/golang-ubi:latest
 ```
 
 ## Tags
