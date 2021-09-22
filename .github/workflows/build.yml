@@ -79,7 +79,7 @@ jobs:
           SOURCE_NAME=${{ steps.git_build_info.outputs.SOURCE_NAME }}
 
     - name: Create a new Release with the newly built container
-      if: steps.golang_version.outputs.IS_TAGGED_VERSION == "true"
+      if: "contains(steps.golang_version.outputs.IS_TAGGED_VERSION, 'true')"
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GHUB_TOKEN }}
