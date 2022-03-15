@@ -80,3 +80,6 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GHUB_TOKEN }}
+        allowUpdates: true
+        tag: "v${{ steps.golang_version.outputs.GOLANG_VERSION }}"
+
